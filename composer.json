@@ -13,5 +13,8 @@
             "App\\": "app/"
         }
     },
-    "require": {}
+    "require": {
+        "illuminate/database": "^5.7",
+        "vlucas/phpdotenv": "^3.1"
+    }
 }
