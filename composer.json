@@ -1,0 +1,17 @@
+{
+    "name": "gabriel-flores/portafolio-php",
+    "description": "Creaci\u0000n de un framework b\u0000sico de php",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Gabriel Flores",
+            "email": "gabrielfloresmonsalve@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}
