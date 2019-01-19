@@ -16,3 +16,5 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - Dotenv file para variables de entorno
 - Front Controller
 - PSR-7 router
+- Patrón MVC
+- Twig

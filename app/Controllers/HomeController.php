@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\{ Job, Project };
 
-class HomeController {
+class HomeController extends BaseController {
     public function homeAction() {
         $jobs = Job::all();
         $projects = Project::all();
@@ -12,6 +12,9 @@ class HomeController {
         $name = 'Example Name';
         $limitMonths = 2000;
 
-        include '../Views/index.php';
+        return $this->renderHTML('index.twig', [
+            'name' => $name,
+            'jobs' => $jobs,
+        ]);
     }
 }
