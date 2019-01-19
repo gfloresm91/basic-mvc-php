@@ -14,3 +14,5 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - Composer
 - Eloquent (ORM para base de datos)
 - Dotenv file para variables de entorno
+- Front Controller
+- PSR-7
