@@ -5,7 +5,7 @@
     $dotenv = Dotenv\Dotenv::create(__DIR__);
     $dotenv->load();
 
-    use App\Models\Job;
+    use App\Models\Project;
 
     use Illuminate\Database\Capsule\Manager as Capsule;
 
@@ -31,10 +31,10 @@
 
     if(!empty($_POST))
     {
-        $job = new Job();
-        $job->title = $_POST['title'];
-        $job->description = $_POST['description'];
-        $job->save();
+        $project = new Project();
+        $project->title = $_POST['title'];
+        $project->description = $_POST['description'];
+        $project->save();
     }
 ?>
 
@@ -42,7 +42,7 @@
 <html lang="en">
 
 <head>
-    <title>Jobs</title>
+    <title>Projects</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,7 +56,7 @@
     <section>
         <div class="container">
             <div class="page-header">
-                <h1>Jobs <small>Add you job</small></h1>
+                <h1>Projects <small>Add you Project</small></h1>
             </div>
         </div>
     </section>
@@ -66,7 +66,7 @@
     <section>
         <div class="container">
             
-            <form action="addJob.php" method="POST" class="form-horizontal" role="form">
+            <form action="addProject.php" method="POST" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Add your title">
