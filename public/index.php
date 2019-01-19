@@ -8,6 +8,9 @@ error_reporting(E_ALL);
 // PSR-4
 require_once '../vendor/autoload.php';
 
+// PSR-7 router
+use Aura\Router\RouterContainer;
+
 // DotEnv
 $dotenv = Dotenv\Dotenv::create(__DIR__, '../.env');
 $dotenv->load();
@@ -44,4 +47,19 @@ $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_FILES
 );
 
-var_dump($request->getUri()->getPath());
+// PSR-7 router
+$routerContainer = new RouterContainer();
+$map = $routerContainer->getMap();
+
+// Routes name url file
+$map->get('index', '/', '../index.php');
+$map->get('addJobs', '/job/add', '../addJob.php');
+
+$matcher = $routerContainer->getMatcher();
+$route = $matcher->match($request);
+
+if (!$route) {
+    echo 'Route not found';
+} else {
+    require $route->handler;
+}

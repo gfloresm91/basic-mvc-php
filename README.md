@@ -15,4 +15,4 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - Eloquent (ORM para base de datos)
 - Dotenv file para variables de entorno
 - Front Controller
-- PSR-7
+- PSR-7 router
