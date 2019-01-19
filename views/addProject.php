@@ -1,43 +1,3 @@
-<?php
-    
-    require_once 'vendor/autoload.php';
-
-    $dotenv = Dotenv\Dotenv::create(__DIR__);
-    $dotenv->load();
-
-    use App\Models\Project;
-
-    use Illuminate\Database\Capsule\Manager as Capsule;
-
-    $capsule = new Capsule;
-    
-    $capsule->addConnection([
-        'driver'    => 'mysql',
-        'host'      => getenv('DB_HOST'),
-        'port'      => getenv('DB_PORT'),
-        'database'  => getenv('DB_DATABASE'),
-        'username'  => getenv('DB_USERNAME'),
-        'password'  => getenv('DB_PASSWORD'),
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-    ]);
-
-    // Make this Capsule instance available globally via static methods... (optional)
-    $capsule->setAsGlobal();
-
-    // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
-    $capsule->bootEloquent();
-
-    if(!empty($_POST))
-    {
-        $project = new Project();
-        $project->title = $_POST['title'];
-        $project->description = $_POST['description'];
-        $project->save();
-    }
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -66,7 +26,7 @@
     <section>
         <div class="container">
             
-            <form action="addProject.php" method="POST" class="form-horizontal" role="form">
+            <form action="/projects/add" method="POST" class="form-horizontal" role="form">
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Add your title">

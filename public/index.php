@@ -38,6 +38,26 @@ $capsule->setAsGlobal();
 // Setup the Eloquent ORM... (optional; unless you've used setEventDispatcher())
 $capsule->bootEloquent();
 
+// TODO: sacar esta función de aquí
+function printElement($job)
+{
+  // if ($job->visible == false) {
+  //   return;
+  // }
+
+  echo '<li class="work-position">';
+  echo '<h5>' . $job->title . '</h5>';
+  echo '<p>' . $job->description . '</p>';
+  echo '<p>' . $job->getDurationAsString() . '</p>';
+  echo '<strong>Achievements:</strong>';
+  echo '<ul>';
+  echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
+  echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
+  echo '<li>Lorem ipsum dolor sit amet, 80% consectetuer adipiscing elit.</li>';
+  echo '</ul>';
+  echo '</li>';
+}
+
 // PSR-7
 $request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
@@ -52,8 +72,30 @@ $routerContainer = new RouterContainer();
 $map = $routerContainer->getMap();
 
 // Routes name url file
-$map->get('index', '/', '../index.php');
-$map->get('addJobs', '/job/add', '../addJob.php');
+$map->get('index', '/', [
+    'controller' => 'App\Controllers\HomeController',
+    'action' => 'homeAction'
+]);
+
+$map->get('addJobs', '/jobs/add', [
+    'controller' => 'App\Controllers\JobsController',
+    'action' => 'getaddJobAction'
+]);
+
+$map->post('createJobs', '/jobs/add', [
+    'controller' => 'App\Controllers\JobsController',
+    'action' => 'getaddJobAction'
+]);
+
+$map->get('addProjects', '/projects/add', [
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'getaddProjectAction'
+]);
+
+$map->post('createProjects', '/projects/add', [
+    'controller' => 'App\Controllers\ProjectsController',
+    'action' => 'getaddProjectAction'
+]);
 
 $matcher = $routerContainer->getMatcher();
 $route = $matcher->match($request);
@@ -61,5 +103,10 @@ $route = $matcher->match($request);
 if (!$route) {
     echo 'Route not found';
 } else {
-    require $route->handler;
+    $handlerData = $route->handler;
+    $controllerName = $handlerData['controller'];
+    $actionName = $handlerData['action'];
+    
+    $controller = new $controllerName;
+    $controller->$actionName($request);
 }
