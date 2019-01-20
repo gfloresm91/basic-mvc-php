@@ -18,3 +18,4 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - PSR-7 router
 - Patrón MVC
 - Twig
+- Validator

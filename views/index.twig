@@ -48,11 +48,13 @@
     <div>
       <h3 class="border-bottom-gray">Projects</h3>
       <ul>
-        <?php
-              for ($idx = 0; $idx < count($projects); $idx++) {
-                printElement($projects[$idx]);
-              }
-              ?>
+        {% for project in projects %}
+        <li class="work-position">
+          <h5>{{ project.title }}</h5>
+
+          <p>{{ project.description }}</p>
+        </li>
+        {% endfor %}
       </ul>
       <div class="project">
         <h5>Project X</h5>

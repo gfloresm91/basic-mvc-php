@@ -4,7 +4,7 @@
 <section>
     <div class="container">
         <div class="page-header">
-            <h1>Projects <small>Add you Project</small></h1>
+            <h1>Projects <small>Add your Project</small></h1>
         </div>
     </div>
 </section>
@@ -13,6 +13,12 @@
 
 <section>
     <div class="container">
+
+        {% if responseMessage %}
+        <div class="alert alert-primary" role="alert">
+            {{ responseMessage }}
+        </div>
+        {% endif %}
 
         <form action="/projects/add" method="POST" class="form-horizontal" role="form">
             <div class="form-group">
