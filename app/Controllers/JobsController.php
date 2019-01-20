@@ -19,9 +19,21 @@ class JobsController extends BaseController {
             
             try {
                 $jobValidator->assert($data);
+                
                 $job = new Job();
                 $job->title = $data['title'];
                 $job->description = $data['description'];
+                
+                // TODO: Validate images
+                $files = $request->getUploadedFiles();
+                $logoempresa = $files['logoempresa'];
+
+                if ($logoempresa->getError() == UPLOAD_ERR_OK) {
+                    $filename = $logoempresa->getClientFilename();
+                    $logoempresa->moveTo("uploads/$filename");
+                    $job->filename = "uploads/$filename";
+                }
+
                 $job->save();
 
                 $responseMessage = 'Success';

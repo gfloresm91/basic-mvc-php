@@ -21,7 +21,7 @@
         </div>
         {% endif %}
 
-        <form action="/jobs/add" method="POST" class="form-horizontal" role="form">
+        <form action="/jobs/add" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" name="title" id="title" placeholder="Add your title">
@@ -30,6 +30,11 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <input type="text" class="form-control" name="description" id="description" placeholder="Add your description">
+            </div>
+
+            <div class="form-group">
+              <label for="logoempresa">Logo de la empresa</label>
+              <input type="file" class="form-control-file" name="logoempresa" id="logoempresa" placeholder="Ingrese el logo de la empresa">
             </div>
 
             <div class="form-group">

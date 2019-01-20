@@ -19,3 +19,4 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - Patrón MVC
 - Twig
 - Validator
+- Subida de archivos
