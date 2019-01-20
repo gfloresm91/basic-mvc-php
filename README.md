@@ -20,3 +20,4 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - Twig
 - Validator
 - Subida de archivos
+- Login y registro de usuarios

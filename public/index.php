@@ -8,6 +8,8 @@ error_reporting(E_ALL);
 // PSR-4
 require_once '../vendor/autoload.php';
 
+session_start();
+
 // PSR-7 router
 use Aura\Router\RouterContainer;
 
@@ -79,22 +81,59 @@ $map->get('index', '/', [
 
 $map->get('addJobs', '/jobs/add', [
     'controller' => 'App\Controllers\JobsController',
-    'action' => 'getaddJobAction'
+    'action' => 'getaddJobAction',
+    'auth' => true
 ]);
 
 $map->post('createJobs', '/jobs/add', [
     'controller' => 'App\Controllers\JobsController',
-    'action' => 'getaddJobAction'
+    'action' => 'getaddJobAction',
+    'auth' => true
 ]);
 
 $map->get('addProjects', '/projects/add', [
     'controller' => 'App\Controllers\ProjectsController',
-    'action' => 'getaddProjectAction'
+    'action' => 'getaddProjectAction',
+    'auth' => true
 ]);
 
 $map->post('createProjects', '/projects/add', [
     'controller' => 'App\Controllers\ProjectsController',
-    'action' => 'getaddProjectAction'
+    'action' => 'getaddProjectAction',
+    'auth' => true
+]);
+
+$map->get('addUsers', '/register', [
+    'controller' => 'App\Controllers\UsersController',
+    'action' => 'getAddUser',
+    'auth' => true
+]);
+
+$map->post('createUsers', '/register', [
+    'controller' => 'App\Controllers\UsersController',
+    'action' => 'postCreateUser',
+    'auth' => true
+]);
+
+$map->get('loginForm', '/login', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogin'
+]);
+
+$map->post('auth', '/auth', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'postLogin'
+]);
+
+$map->get('admin', '/admin', [
+    'controller' => 'App\Controllers\AdminController',
+    'action' => 'getIndex',
+    'auth' => true
+]);
+
+$map->get('logout', '/logout', [
+    'controller' => 'App\Controllers\AuthController',
+    'action' => 'getLogout'
 ]);
 
 $matcher = $routerContainer->getMatcher();
@@ -106,9 +145,24 @@ if (!$route) {
     $handlerData = $route->handler;
     $controllerName = $handlerData['controller'];
     $actionName = $handlerData['action'];
-    
+    $needsAuth = $handlerData['auth'] ?? false;
+
+    $sessionUserId = $_SESSION['user_id'] ?? null;
+    if ($needsAuth && !$sessionUserId) {
+        // TODO: Change this to redirection to login
+        echo 'Protected route';
+        die;
+    }
+
     $controller = new $controllerName;
     $response = $controller->$actionName($request);
 
+    foreach ($response->getHeaders() as $name => $values) {
+        foreach ($values as $value) {
+            header(sprintf('%s: %s', $name, $value), false);
+        }
+    }
+
+    http_response_code($response->getStatusCode());
     echo $response->getBody();
 }

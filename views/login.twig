@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="page-header">
+            <h1>Login <small>Login to web</small></h1>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section>
+    <div class="container">
+        {% if responseMessage %}
+        <div class="alert alert-primary" role="alert">
+            {{ responseMessage }}
+        </div>
+        {% endif %}
+        <form action="/auth" method="POST">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
