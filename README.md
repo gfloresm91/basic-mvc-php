@@ -1,6 +1,6 @@
 # Portafolio genérico
 
-En este proyecto se intentará recrear un framework básico siguiendo la arquitectura modelo, vista y controlador en PHP
+Creación de un framework MVC con PHP, se intentará recrear la estructura de Laravel framework
 
 ## Conceptos vistos
 
@@ -10,14 +10,16 @@ En este proyecto se intentará recrear un framework básico siguiendo la arquite
 - Herencia y polimorfismo
 - Interfaces
 - Namespaces
-- PSR
+- PSR-4
 - Composer
 - Eloquent (ORM para base de datos)
 - Dotenv file para variables de entorno
 - Front Controller
-- PSR-7 router
+- PSR-7
+- Router
 - Patrón MVC
 - Twig
 - Validator
 - Subida de archivos
 - Login y registro de usuarios
+- Closures
