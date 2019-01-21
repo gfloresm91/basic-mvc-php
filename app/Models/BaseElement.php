@@ -4,7 +4,7 @@ namespace App\Models;
 
 class BaseElement implements Printable
 {
-    private $title;
+    private $_title;
     public $description;
     public $visible = true;
     public $months;
@@ -18,15 +18,15 @@ class BaseElement implements Printable
     public function setTitle($title)
     {
         if ($title == '') {
-            $this->title = 'N/A';
+            $this->_title = 'N/A';
         } else {
-            $this->title = $title;
+            $this->_title = $title;
         }
     }
 
     public function getTitle()
     {
-        return $this->title;
+        return $this->_title;
     }
 
     public function getDurationAsString()

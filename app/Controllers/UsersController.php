@@ -5,12 +5,15 @@ namespace App\Controllers;
 use App\Models\User;
 use Respect\Validation\Validator;
 
-class UsersController extends BaseController {
-    public function getAddUser() {
+class UsersController extends BaseController
+{
+    public function getAddUser()
+    {
         return $this->renderHtml('addUser.twig');
     }
 
-    public function postCreateUser($request) {
+    public function postCreateUser($request)
+    {
         $data = $request->getParsedBody();
 
         // TODO: Validate
@@ -23,4 +26,3 @@ class UsersController extends BaseController {
         return $this->renderHtml('addUser.twig');
     }
 }
-

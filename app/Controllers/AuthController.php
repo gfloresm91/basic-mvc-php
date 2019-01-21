@@ -6,12 +6,15 @@ use App\Models\User;
 use Respect\Validation\Validator;
 use Zend\Diactoros\Response\RedirectResponse as Redirect;
 
-class AuthController extends BaseController {
-    public function getLogin() {
+class AuthController extends BaseController
+{
+    public function getLogin()
+    {
         return $this->renderHtml('login.twig');
     }
 
-    public function postLogin($request) {
+    public function postLogin($request)
+    {
         $responseMessage = null;
 
         $data = $request->getParsedBody();
@@ -29,14 +32,16 @@ class AuthController extends BaseController {
             $responseMessage = 'Bad credentials';
         }
 
-        return $this->renderHtml('login.twig', [
+        return $this->renderHtml(
+            'login.twig', [
             'responseMessage' => $responseMessage
-        ]);
+            ]
+        );
     }
 
-    public function getLogout() {
+    public function getLogout()
+    {
         unset($_SESSION['user_id']);
         return new Redirect('login');
     }
 }
-
