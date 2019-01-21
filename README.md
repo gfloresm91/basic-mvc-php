@@ -23,3 +23,4 @@ Creación de un framework MVC con PHP, se intentará recrear la estructura de La
 - Subida de archivos
 - Login y registro de usuarios
 - Closures
+- Traits

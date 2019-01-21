@@ -86,6 +86,16 @@ $map->get(
 );
 
 $map->get(
+    'indexJobs',
+    '/jobs',
+    [
+        'controller' => 'App\Controllers\JobsController',
+        'action' => 'indexAction',
+        'auth' => true
+    ]
+);
+
+$map->get(
     'addJobs',
     '/jobs/add',
     [
@@ -101,6 +111,16 @@ $map->post(
     [
     'controller' => 'App\Controllers\JobsController',
     'action' => 'getaddJobAction',
+    'auth' => true
+    ]
+);
+
+$map->get(
+    'deleteJobs',
+    '/jobs/delete',
+    [
+    'controller' => 'App\Controllers\JobsController',
+    'action' => 'deleteAction',
     'auth' => true
     ]
 );
@@ -198,6 +218,10 @@ if (!$route) {
         // TODO: Change this to redirection to login
         echo 'Protected route';
         die;
+    }
+
+    foreach ($route->attributes as $key => $attribute) {
+        $request = $request->withAttribute($key, $attribute);
     }
 
     $controller = new $controllerName;

@@ -14,15 +14,15 @@ class HomeController extends BaseController
 
         $name = 'Example Name';
         
-        $limitMonths = 15;
-        $filterFunction = function ($job) use ($limitMonths) {
-            return $job['months'] >= $limitMonths;
-        };
+        // $limitMonths = 10;
+        // $filterFunction = function (array $job) use ($limitMonths) {
+        //     return $job['months'] >= $limitMonths;
+        // };
 
-        $jobs = array_filter(
-            $jobs->toArray(),
-            $filterFunction
-        );
+        // $jobs = array_filter(
+        //     $jobs->toArray(),
+        //     $filterFunction
+        // );
 
         return $this->renderHTML(
             'index.twig',

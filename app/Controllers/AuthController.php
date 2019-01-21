@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\User;
 use Respect\Validation\Validator;
 use Zend\Diactoros\Response\RedirectResponse as Redirect;
+use Zend\Diactoros\ServerRequest;
 
 class AuthController extends BaseController
 {
@@ -13,7 +14,7 @@ class AuthController extends BaseController
         return $this->renderHtml('login.twig');
     }
 
-    public function postLogin($request)
+    public function postLogin(ServerRequest $request)
     {
         $responseMessage = null;
 

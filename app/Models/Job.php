@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\traits\HasDefaultImage;
 
 class Job extends Model
 {
+    use HasDefaultImage;
     protected $table = 'jobs';
 
     public function getDurationAsString()
