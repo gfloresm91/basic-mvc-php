@@ -9,7 +9,7 @@ class ProjectService
 {
     public function deleteProject($id)
     {
-        $project = Project::find($id);
+        $project = Project::findOrFail($id);
         $project->delete();
     }
 }

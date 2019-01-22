@@ -9,7 +9,7 @@ class UserService
 {
     public function deleteUser($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
         $user->delete();
     }
 }
