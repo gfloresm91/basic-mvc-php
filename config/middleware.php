@@ -27,19 +27,22 @@ if (!$route) {
     echo 'Route not found';
 } else {
     // Middleware section
-    $emiter = new SapiEmitter();
+
+    $emiter = new SapiEmitter();    
+    
     try {
         $harmony = new Harmony($request, new Response());
         $harmony
             ->addMiddleware(new HttpHandlerRunnerMiddleware(new SapiEmitter()))
-            ->addMiddleware(new App\Middlewares\AuthMiddleware())
+            ->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware())
             ->addMiddleware(new Middlewares\AuraRouter($routerContainer))
+            ->addMiddleware(new App\Middlewares\AuthMiddleware())
             ->addMiddleware(new DispatcherMiddleware($container, 'request-handler'));
 
         $harmony();
     } catch (Exception $ex) {
-        $emiter->emit(new Response\EmptyResponse(400));
-    } catch (Error $e) {
+        $emiter->emit(new Response\EmptyResponse(500));
+    } catch (Error $er) {
         $emiter->emit(new Response\EmptyResponse(500));
     }
     
