@@ -2,17 +2,17 @@
 
 {% block content %}
 <div class="row">
-    <h1>Users</h1>
+    <h1>Projects</h1>
     <table class="table">
         <tr>
-            <th>User email</th>
+            <th>Project name</th>
             <th></th>
         </tr>
-        {% for user in users %}
+        {% for project in projects %}
         <tr>
-            <td>{{ user.email }}</td>
+            <td>{{ project.title }}</td>
             <td>
-                <a class="btn btn-primary" href="/users/delete?id={{ user.id }}">Delete</a>
+                <a class="btn btn-primary" href="/projects/delete?id={{ project.id }}">Delete</a>
             </td>
         </tr>
         {% endfor %}

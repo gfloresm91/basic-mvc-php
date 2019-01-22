@@ -4,9 +4,27 @@ namespace App\Controllers;
 
 use App\Models\Project;
 use Respect\Validation\Validator;
+use App\Services\ProjectService;
+use Zend\Diactoros\ServerRequest;
+use Zend\Diactoros\Response\RedirectResponse;
 
 class ProjectsController extends BaseController
 {
+    private $_projectService;
+
+    public function __construct(ProjectService $projectService)
+    {
+        parent::__construct();
+        $this->_projectService = $projectService;
+    }
+
+    public function indexAction()
+    {
+        $projects = Project::all();
+
+        return $this->renderHTML('/projects/index.twig', compact('projects'));
+    }
+
     public function getaddProjectAction($request)
     {
         $responseMessage = null;
@@ -36,9 +54,17 @@ class ProjectsController extends BaseController
         }
 
         return $this->renderHTML(
-            'addProject.twig', [
+            'projects/addProject.twig', [
             'responseMessage' => $responseMessage
             ]
         );
+    }
+
+    public function deleteAction(ServerRequest $request)
+    {
+        $params = $request->getQueryParams();
+        $this->_projectService->deleteProject($params['id']);
+
+        return new RedirectResponse('/projects');
     }
 }

@@ -68,7 +68,7 @@ class JobsController extends BaseController
         }
 
         return $this->renderHTML(
-            'addJob.twig',
+            'jobs/addJob.twig',
             [
             'responseMessage' => $responseMessage
             ]

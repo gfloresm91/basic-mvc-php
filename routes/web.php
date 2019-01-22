@@ -1,6 +1,8 @@
 <?php
 
 // Routes name url file
+
+// Home section
 $map->get(
     'index',
     '/',
@@ -10,13 +12,13 @@ $map->get(
     ]
 );
 
+// Jobs section
 $map->get(
     'indexJobs',
     '/jobs',
     [
         'App\Controllers\JobsController',
         'indexAction'
-        
     ]
 );
 
@@ -26,7 +28,6 @@ $map->get(
     [
         'App\Controllers\JobsController',
         'getaddJobAction'
-        
     ]
 );
 
@@ -36,7 +37,6 @@ $map->post(
     [
         'App\Controllers\JobsController',
         'getaddJobAction'
-        
     ]
 );
 
@@ -46,7 +46,16 @@ $map->get(
     [
         'App\Controllers\JobsController',
         'deleteAction'
-        
+    ]
+);
+
+// Projects section
+$map->get(
+    'indexProjects',
+    '/projects',
+    [
+        'App\Controllers\ProjectsController',
+        'indexAction'
     ]
 );
 
@@ -56,7 +65,6 @@ $map->get(
     [
         'App\Controllers\ProjectsController',
         'getaddProjectAction'
-        
     ]
 );
 
@@ -66,7 +74,25 @@ $map->post(
     [
         'App\Controllers\ProjectsController',
         'getaddProjectAction'
-        
+    ]
+);
+
+$map->get(
+    'deleteProjects',
+    '/projects/delete',
+    [
+        'App\Controllers\ProjectsController',
+        'deleteAction'
+    ]
+);
+
+// Users section 
+$map->get(
+    'indexUsers',
+    '/users',
+    [
+        'App\Controllers\UsersController',
+        'indexAction'
     ]
 );
 
@@ -76,7 +102,6 @@ $map->get(
     [
         'App\Controllers\UsersController',
         'getAddUser'
-        
     ]
 );
 
@@ -86,10 +111,19 @@ $map->post(
     [
         'App\Controllers\UsersController',
         'postCreateUser'
-        
     ]
 );
 
+$map->get(
+    'deleteUsers',
+    '/users/delete',
+    [
+        'App\Controllers\UsersController',
+        'deleteAction'
+    ]
+);
+
+// Authentication section
 $map->get(
     'loginForm',
     '/login',
@@ -114,7 +148,6 @@ $map->get(
     [
         'App\Controllers\AdminController',
         'getIndex'
-        
     ]
 );
 
