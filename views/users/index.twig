@@ -1,0 +1,21 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+<div class="row">
+    <h1>Users</h1>
+    <table class="table">
+        <tr>
+            <th>Use email</th>
+            <th></th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>
+                <a class="btn btn-primary" href="/users/delete?id={{ user.id }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
