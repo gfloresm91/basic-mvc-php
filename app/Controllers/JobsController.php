@@ -6,9 +6,18 @@ use App\Models\Job;
 use Respect\Validation\Validator;
 use Zend\Diactoros\ServerRequest;
 use Zend\Diactoros\Response\RedirectResponse;
+use App\Services\JobService;
 
 class JobsController extends BaseController
 {
+    private $_jobService;
+
+    public function __construct(JobService $jobService)
+    {
+        parent::__construct();
+        $this->_jobService = $jobService;
+    }
+
     public function indexAction()
     {
         $jobs = Job::withTrashed()->get();
@@ -69,8 +78,7 @@ class JobsController extends BaseController
     public function deleteAction(ServerRequest $request)
     {
         $params = $request->getQueryParams();
-        $job = Job::find($params['id']);
-        $job->delete();
+        $this->_jobService->deleteJob($params['id']);
 
         return new RedirectResponse('/jobs');
     }

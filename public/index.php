@@ -20,6 +20,8 @@ $dotenv->load();
 // Eloquent
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+$container = new DI\Container();
+
 $capsule = new Capsule;
 
 $capsule->addConnection(
@@ -223,8 +225,9 @@ if (!$route) {
     foreach ($route->attributes as $key => $attribute) {
         $request = $request->withAttribute($key, $attribute);
     }
+    
+    $controller = $container->get($controllerName);
 
-    $controller = new $controllerName;
     $response = $controller->$actionName($request);
 
     foreach ($response->getHeaders() as $name => $values) {

@@ -24,3 +24,5 @@ Creación de un framework MVC con PHP, se intentará recrear la estructura de La
 - Login y registro de usuarios
 - Closures
 - Traits
+- Delete y soft deletes
+- Inyección de dependencias
