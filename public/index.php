@@ -100,8 +100,8 @@ $map->get(
     '/jobs',
     [
         'App\Controllers\JobsController',
-        'indexAction',
-        'auth' => true
+        'indexAction'
+        
     ]
 );
 
@@ -110,8 +110,8 @@ $map->get(
     '/jobs/add',
     [
         'App\Controllers\JobsController',
-        'getaddJobAction',
-        'auth' => true
+        'getaddJobAction'
+        
     ]
 );
 
@@ -120,8 +120,8 @@ $map->post(
     '/jobs/add',
     [
         'App\Controllers\JobsController',
-        'getaddJobAction',
-        'auth' => true
+        'getaddJobAction'
+        
     ]
 );
 
@@ -130,8 +130,8 @@ $map->get(
     '/jobs/delete',
     [
         'App\Controllers\JobsController',
-        'deleteAction',
-        'auth' => true
+        'deleteAction'
+        
     ]
 );
 
@@ -140,8 +140,8 @@ $map->get(
     '/projects/add',
     [
         'App\Controllers\ProjectsController',
-        'getaddProjectAction',
-        'auth' => true
+        'getaddProjectAction'
+        
     ]
 );
 
@@ -150,8 +150,8 @@ $map->post(
     '/projects/add',
     [
         'App\Controllers\ProjectsController',
-        'getaddProjectAction',
-        'auth' => true
+        'getaddProjectAction'
+        
     ]
 );
 
@@ -160,8 +160,8 @@ $map->get(
     '/register',
     [
         'App\Controllers\UsersController',
-        'getAddUser',
-        'auth' => true
+        'getAddUser'
+        
     ]
 );
 
@@ -170,8 +170,8 @@ $map->post(
     '/register',
     [
         'App\Controllers\UsersController',
-        'postCreateUser',
-        'auth' => true
+        'postCreateUser'
+        
     ]
 );
 
@@ -198,8 +198,8 @@ $map->get(
     '/admin',
     [
         'App\Controllers\AdminController',
-        'getIndex',
-        'auth' => true
+        'getIndex'
+        
     ]
 );
 
@@ -218,22 +218,11 @@ $route = $matcher->match($request);
 if (!$route) {
     echo 'Route not found';
 } else {
-    // $handlerData = $route->handler;
-    // $controllerName = $handlerData['controller'];
-    // $actionName = $handlerData['action'];
-    // $needsAuth = $handlerData['auth'] ?? false;
-
-    // $sessionUserId = $_SESSION['user_id'] ?? null;
-    // if ($needsAuth && !$sessionUserId) {
-    //     // TODO: Change this to redirection to login
-    //     echo 'Protected route';
-    //     die;
-    // }
-
     // Middleware section
     $harmony = new Harmony($request, new Response());
     $harmony
         ->addMiddleware(new HttpHandlerRunnerMiddleware(new SapiEmitter()))
+        ->addMiddleware(new App\Middlewares\AuthMiddleware())
         ->addMiddleware(new Middlewares\AuraRouter($routerContainer))
         ->addMiddleware(new DispatcherMiddleware($container, 'request-handler'));
 
