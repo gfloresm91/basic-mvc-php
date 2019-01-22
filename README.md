@@ -27,3 +27,4 @@ Creación de un framework MVC con PHP, se intentará recrear la estructura de La
 - Delete y soft deletes
 - Inyección de dependencias
 - Middleware
+- Error Handling
