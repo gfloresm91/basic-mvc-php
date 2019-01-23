@@ -25,6 +25,7 @@
         "middlewares/aura-router": "^1.1",
         "zendframework/zend-diactoros": "^1.8",
         "franzl/whoops-middleware": "^1.0",
-        "monolog/monolog": "^1.24"
+        "monolog/monolog": "^1.24",
+        "robmorgan/phinx": "^0.10.6"
     }
 }
