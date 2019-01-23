@@ -29,3 +29,5 @@ Creación de un framework MVC con PHP, se intentará recrear la estructura de La
 - Middleware
 - Error Handling
 - Log
+- Migraciones
+- Comandos
