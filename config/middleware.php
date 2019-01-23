@@ -33,15 +33,22 @@ if (!$route) {
     try {
         $harmony = new Harmony($request, new Response());
         $harmony
-            ->addMiddleware(new HttpHandlerRunnerMiddleware(new SapiEmitter()))
-            ->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware())
+            ->addMiddleware(new HttpHandlerRunnerMiddleware(new SapiEmitter()));
+            
+        if (getenv('DEBUG') === 'true') {
+            $harmony
+                ->addMiddleware(new \Franzl\Middleware\Whoops\WhoopsMiddleware());
+        }
+
+        $harmony
             ->addMiddleware(new Middlewares\AuraRouter($routerContainer))
             ->addMiddleware(new App\Middlewares\AuthMiddleware())
             ->addMiddleware(new DispatcherMiddleware($container, 'request-handler'));
 
         $harmony();
     } catch (Exception $ex) {
-        $emiter->emit(new Response\EmptyResponse(500));
+        $log->warning($ex->getMessage());
+        $emiter->emit(new Response\EmptyResponse(400));
     } catch (Error $er) {
         $emiter->emit(new Response\EmptyResponse(500));
     }
