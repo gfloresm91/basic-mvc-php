@@ -159,3 +159,21 @@ $map->get(
         'getLogout'
     ]
 );
+
+$map->get(
+    'contactForm',
+    '/contact',
+    [
+        'App\Controllers\ContactController',
+        'indexAction'
+    ]
+);
+
+$map->post(
+    'contactSend',
+    '/contact/send',
+    [
+        'App\Controllers\ContactController',
+        'sendAction'
+    ]
+);

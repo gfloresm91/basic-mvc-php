@@ -31,3 +31,4 @@ Creación de un framework MVC con PHP, se intentará recrear la estructura de La
 - Log
 - Migraciones
 - Comandos
+- Email
