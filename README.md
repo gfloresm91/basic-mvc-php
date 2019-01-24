@@ -32,3 +32,4 @@ Creación de un framework MVC con PHP, se intentará recrear la estructura de La
 - Migraciones
 - Comandos
 - Email
+- Tareas asíncronas

@@ -3,10 +3,8 @@
 namespace App\Controllers;
 
 use Zend\Diactoros\ServerRequest;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_SmtpTransport;
 use Zend\Diactoros\Response\RedirectResponse;
+use App\Models\Message;
 
 class ContactController extends BaseController
 {
@@ -19,27 +17,13 @@ class ContactController extends BaseController
     {
         $data = $request->getParsedBody();
 
-        // Create the Transport
-        $transport = (new Swift_SmtpTransport(
-            getenv('SMTP_HOST'), getenv('SMTP_PORT')
-        ))
-            ->setUsername(getenv('SMTP_USER'))
-            ->setPassword(getenv('SMTP_PASS'));
+        $message = new Message();
 
-        // Create the Mailer using your created Transport
-        $mailer = new Swift_Mailer($transport);
-
-        // Create a message
-        $message = (new Swift_Message('Wonderful Subject'))
-            ->setFrom(['contact@mail.com' => 'Contact Form'])
-            ->setTo(['receiver@domain.org', 'other@domain.org' => 'A name'])
-            ->setBody(
-                'Hi you have a message. Name: '. $data['name']
-                . ' Email: ' . $data['email'] . ' Message: ' . $data['message']
-            );
-
-        // Send the message
-        $result = $mailer->send($message);
+        $message->name = $data['name'];
+        $message->email = $data['email'];
+        $message->message = $data['message'];
+        $message->sent = false;
+        $message->save();
 
         return new RedirectResponse('/contact');
     }
