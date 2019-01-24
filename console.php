@@ -14,5 +14,6 @@ $application = new Application();
 
 $application->add(new \App\Commands\HelloWorld());
 $application->add(new \App\Commands\SendMail());
+$application->add(new \App\Commands\CreateUser());
 
 $application->run();
